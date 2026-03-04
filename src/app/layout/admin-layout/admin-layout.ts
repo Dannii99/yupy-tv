@@ -16,7 +16,6 @@ import { LucideAngularModule } from 'lucide-angular';
   imports: [
     RouterOutlet,
     RouterLink,
-    RouterLinkActive,
     NzLayoutModule,
     NzMenuModule,
     NzAvatarModule,
