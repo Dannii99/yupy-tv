@@ -173,21 +173,21 @@ import { LucideAngularModule } from 'lucide-angular';
             </div>
             
             <nz-dropdown-menu #userMenu="nzDropdownMenu">
-              <ul nz-menu class="min-w-[10rem] p-2 rounded-2xl shadow-xl border-none">
-                <li nz-menu-item class="rounded-xl py-2 !grid !grid-cols-2 items-center gap-2">
-                  <lucide-icon name="user" class="w-4 h-4"></lucide-icon>
-                  <p>Mi Perfil</p>
-                </li>
-                <li nz-menu-item class="rounded-xl py-2 flex items-center gap-2">
-                  <lucide-icon name="settings" class="w-4 h-4"></lucide-icon>
-                  Ajustes
-                </li>
-                <li nz-menu-divider></li>
-                <li nz-menu-item class="rounded-xl py-2 flex items-center gap-2 text-red-500">
-                  <lucide-icon name="log-out" class="w-4 h-4"></lucide-icon>
-                  Cerrar Sesión
-                </li>
-              </ul>
+              <div nz-menu class="min-w-[12rem] p-2 rounded-2xl shadow-xl border-none">
+                <div nz-menu-item class="rounded-xl py-2 flex items-center gap-3">
+                  <lucide-icon name="user" class="w-4 h-4 text-gray-500"></lucide-icon>
+                  <span class="font-medium text-gray-700">Mi Perfil</span>
+                </div>
+                <div nz-menu-item class="rounded-xl py-2 flex items-center gap-3">
+                  <lucide-icon name="settings" class="w-4 h-4 text-gray-500"></lucide-icon>
+                  <span class="font-medium text-gray-700">Ajustes</span>
+                </div>
+                <div nz-menu-divider class="my-1 border-gray-50"></div>
+                <div nz-menu-item class="rounded-xl py-2 flex items-center gap-3 group">
+                  <lucide-icon name="log-out" class="w-4 h-4 text-red-400 group-hover:text-red-500"></lucide-icon>
+                  <span class="font-medium text-red-500">Cerrar Sesión</span>
+                </div>
+              </div>
             </nz-dropdown-menu>
           </div>
         </nz-header>
