@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, HostListener, signal, inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -14,6 +14,7 @@ import { LucideAngularModule } from 'lucide-angular';
   selector: 'app-admin-layout',
   standalone: true,
   imports: [
+    CommonModule,
     RouterOutlet,
     RouterLink,
     NzLayoutModule,
