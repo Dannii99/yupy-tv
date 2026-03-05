@@ -1,9 +1,8 @@
+@layer vendor {
+  @import "ng-zorro-antd/ng-zorro-antd.css";
+}
+
 @import "tailwindcss";
-
-/* NG-ZORRO Styles */
-@import "ng-zorro-antd/ng-zorro-antd.css";
-
-
 
 @layer base {
   /* Custom global resets or variables can go here */

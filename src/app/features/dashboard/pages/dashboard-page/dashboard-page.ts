@@ -37,7 +37,7 @@ interface StreamerMock {
       <!-- Stats Row -->
       <div nz-row [nzGutter]="[24, 24]">
         <div nz-col nzXs="24" nzSm="12" nzLg="6">
-          <nz-card class="shadow-sm border-none rounded-xl">
+          <nz-card class="shadow-sm border-none rounded-xl p-4">
             <nz-statistic
               [nzValue]="5"
               [nzTitle]="'Streamers Online'"
@@ -50,7 +50,7 @@ interface StreamerMock {
           </nz-card>
         </div>
         <div nz-col nzXs="24" nzSm="12" nzLg="6">
-          <nz-card class="shadow-sm border-none rounded-xl">
+          <nz-card class="shadow-sm border-none rounded-xl p-4">
             <nz-statistic
               [nzValue]="12400"
               [nzTitle]="'Total Viewers'"
@@ -62,7 +62,7 @@ interface StreamerMock {
           </nz-card>
         </div>
         <div nz-col nzXs="24" nzSm="12" nzLg="6">
-          <nz-card class="shadow-sm border-none rounded-xl">
+          <nz-card class="shadow-sm border-none rounded-xl p-4">
             <nz-statistic
               [nzValue]="12"
               [nzTitle]="'Favoritos'"
@@ -75,7 +75,7 @@ interface StreamerMock {
           </nz-card>
         </div>
         <div nz-col nzXs="24" nzSm="12" nzLg="6">
-          <nz-card class="shadow-sm border-none rounded-xl">
+          <nz-card class="shadow-sm border-none rounded-xl p-4">
             <nz-statistic
               [nzValue]="85"
               [nzTitle]="'Health Score'"

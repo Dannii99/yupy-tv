@@ -89,26 +89,40 @@ import { LucideAngularModule } from 'lucide-angular';
               </div>
               <span class="ml-3 text-lg font-black text-gray-800 tracking-tight">YUPI TV <span class="text-indigo-600">ADMIN</span></span>
             </div>
-            <button nz-button nzType="text" (click)="isDrawerOpen.set(false)" class="p-0 h-8 w-8 flex items-center justify-center">
-              <lucide-icon name="x" class="w-5 h-5 text-gray-400"></lucide-icon>
-            </button>
+            @if (isMobile()) {
+              <button nz-button nzType="text" (click)="isDrawerOpen.set(false)" class="p-0 h-8 w-8 flex items-center justify-center">
+                <lucide-icon name="x" class="w-5 h-5 text-gray-400"></lucide-icon>
+              </button>
+            }
           </div>
-          <ul nz-menu nzMode="inline" class="border-none mt-4">
-            <ng-container *ngTemplateOutlet="menuItems"></ng-container>
-          </ul>
+          <div class="flex flex-col h-[calc(100%-4rem)] justify-between py-4">
+            <ul nz-menu nzMode="inline" class="border-none mt-4">
+              <ng-container *ngTemplateOutlet="menuItems"></ng-container>
+            </ul>
+
+            <div class="px-3">
+              <div class="bg-gray-50 rounded-2xl p-4 flex items-center gap-3">
+                <nz-avatar nzIcon="user" class="bg-indigo-100 text-indigo-600 flex-none"></nz-avatar>
+                <div class="overflow-hidden">
+                  <p class="m-0 font-bold text-gray-800 truncate text-sm">Super Admin</p>
+                  <p class="m-0 text-gray-400 text-xs truncate">admin@yupi.tv</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </ng-container>
       </nz-drawer>
 
       <!-- Main Content -->
       <nz-layout class="flex-1 flex flex-col h-full bg-gray-50/50">
         <!-- Header -->
-        <nz-header class="bg-white/80 backdrop-blur-md px-4 sm:px-8 !flex items-center justify-between border-b border-gray-100 shadow-sm z-30 h-16">
+        <nz-header class="bg-white/80 backdrop-blur-md px-4 md:px-6 !flex items-center justify-between border-b border-gray-100 shadow-sm z-30 h-16">
           <div class="flex items-center gap-4">
             <!-- Mobile Menu Toggle -->
             <button
               nz-button
               nzType="text"
-              class="lg:hidden h-10 w-10 p-0 flex items-center justify-center rounded-xl bg-gray-50 hover:bg-gray-100"
+              class="md:hidden h-10 w-10 p-0 flex items-center justify-center rounded-xl bg-gray-50 hover:bg-gray-100"
               (click)="isDrawerOpen.set(true)"
             >
               <lucide-icon name="menu" class="w-5 h-5 text-gray-600"></lucide-icon>
@@ -118,7 +132,7 @@ import { LucideAngularModule } from 'lucide-angular';
             <button
               nz-button
               nzType="text"
-              class="hidden lg:flex h-10 w-10 p-0 items-center justify-center rounded-xl hover:bg-gray-50"
+              class="hidden md:flex h-10 w-10 p-0 items-center justify-center rounded-xl hover:bg-gray-50"
               (click)="isCollapsed.set(!isCollapsed())"
             >
               <lucide-icon 
@@ -128,7 +142,7 @@ import { LucideAngularModule } from 'lucide-angular';
             </button>
 
             <div class="flex flex-col">
-              <h1 class="text-lg sm:text-xl font-black !text-white m-0 leading-tight">
+              <h1 class="text-lg sm:text-xl font-black m-0 leading-tight">
                 {{ currentTitle() }}
               </h1>
               <span class="text-xs text-gray-400 font-medium hidden sm:block">¡Bienvenido de nuevo!</span>
@@ -299,7 +313,7 @@ export class AdminLayoutComponent {
   }
 
   private checkBreakpoint(): void {
-    const isMobileView = window.innerWidth <= 768;
+    const isMobileView = window.innerWidth < 768;
     this.isMobile.set(isMobileView);
     
     if (isMobileView) {
