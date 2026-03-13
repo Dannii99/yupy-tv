@@ -119,8 +119,11 @@ import { LucideAngularModule } from 'lucide-angular';
               Trending Games
             </h2>
             <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-              @for (game of trendingGames; track game.name) {
-                <div class="min-w-[160px] max-w-[160px] bg-surface border border-border rounded-xl p-3 hover:border-primary/50 transition-all cursor-pointer group shadow-sm">
+              @for (game of trendingGames; track game.id) {
+                <div 
+                  [routerLink]="['/trending-game', game.id]"
+                  class="min-w-[160px] max-w-[160px] bg-surface border border-border rounded-xl p-3 hover:border-primary/50 transition-all cursor-pointer group shadow-sm"
+                >
                   <div class="aspect-[3/4] rounded-lg bg-background mb-3 overflow-hidden shadow-inner">
                     <div class="w-full h-full bg-gradient-to-br from-primary/10 to-surface flex items-center justify-center">
                        <lucide-icon name="play" class="w-8 h-8 text-primary/30 group-hover:scale-110 transition-transform"></lucide-icon>
@@ -233,11 +236,11 @@ export class DashboardComponent {
   ];
 
   trendingGames = [
-    { name: 'Grand Theft Auto V', viewers: '324k' },
-    { name: 'League of Legends', viewers: '285k' },
-    { name: 'Valorant', viewers: '212k' },
-    { name: 'Just Chatting', viewers: '198k' },
-    { name: 'Minecraft', viewers: '145k' },
+    { id: 'gta-v', name: 'Grand Theft Auto V', viewers: '324k' },
+    { id: 'lol', name: 'League of Legends', viewers: '285k' },
+    { id: 'valorant', name: 'Valorant', viewers: '212k' },
+    { id: 'just-chatting', name: 'Just Chatting', viewers: '198k' },
+    { id: 'minecraft', name: 'Minecraft', viewers: '145k' },
   ];
 
   recentAlerts = [

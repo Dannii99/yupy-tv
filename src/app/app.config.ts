@@ -35,7 +35,13 @@ import {
   Clock,
   Eye,
   ThumbsUp,
-  Maximize
+  Maximize,
+  ArrowLeft,
+  Gamepad2,
+  Tags,
+  PlayCircle,
+  Flame,
+  Gamepad
   } from 'lucide-angular';
 
   import { routes } from './app.routes';
@@ -78,7 +84,13 @@ import {
         Clock,
         Eye,
         ThumbsUp,
-        Maximize
+        Maximize,
+        ArrowLeft,
+        Gamepad2,
+        Tags,
+        PlayCircle,
+        Flame,
+        Gamepad
       })
     )
   ]

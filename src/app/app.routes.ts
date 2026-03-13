@@ -16,6 +16,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
       },
       {
+        path: 'trending-game/:id',
+        loadComponent: () => import('./features/trending-game/trending-game-view.component').then(m => m.TrendingGameViewComponent),
+      },
+      {
         path: 'streamers',
         loadComponent: () => import('./features/streamers/streamers.component').then(m => m.StreamersComponent),
       },

@@ -68,3 +68,8 @@
 - Avoid speculative refactors
 - Avoid breaking public interfaces
 - If a change may affect existing behavior, choose the smallest safe implementation
+
+## Icon Usage Rules
+
+- When using an icon, ensure it is registered in the icon provider.
+- Prefer importing only the icons that are used rather than entire icon packs.
