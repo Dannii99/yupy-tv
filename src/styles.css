@@ -85,39 +85,6 @@
 }
 
 
-/* :is(html, body) {
-  font-size: 12px;
-}
-
-@media screm and (min-width: 660px) {
-  :is(html, body) {
-    font-size: 14px !important;
-  }
-}
-
-@media screm and (min-width: 768px) {
-  :is(html, body) {
-    font-size: 14px;
-  }
-}
-
-@media screm and (min-width: 1024px) {
-  :is(html, body) {
-    font-size: 16px;
-  }
-}
-
-@media screm and (min-width: 1280px) {
-  :is(html, body) {
-    font-size: 16px;
-  }
-}
-
-@media screm and (min-width: 1536px) {
-  :is(html, body) {
-    font-size: 24px;
-  }
-} */
 
 :is(html, body) {
   font-size: 12px;
