@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, RouterModule, LucideAngularModule],
   template: `
     <div class="space-y-8 pb-8 animate-in fade-in duration-500">
       <!-- Welcome Header -->
@@ -75,7 +76,10 @@ import { LucideAngularModule } from 'lucide-angular';
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             @for (stream of liveStreams; track stream.id) {
-              <div class="bg-surface border border-border rounded-2xl overflow-hidden group hover:border-primary/30 transition-all shadow-md">
+              <div 
+                [routerLink]="['/stream', stream.id]"
+                class="bg-surface border border-border rounded-2xl overflow-hidden group hover:border-primary/30 transition-all shadow-md cursor-pointer"
+              >
                 <div class="aspect-video relative overflow-hidden bg-background">
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                   

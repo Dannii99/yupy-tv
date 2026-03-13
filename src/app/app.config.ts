@@ -22,12 +22,25 @@ import {
   PanelLeftOpen, 
   CircleCheck, 
   Users, 
-  BarChart3 
-} from 'lucide-angular';
+  BarChart3,
+  Bell,
+  BellOff,
+  UserMinus,
+  MessageSquare,
+  Send,
+  Smile,
+  Share2,
+  DollarSign,
+  ExternalLink,
+  Clock,
+  Eye,
+  ThumbsUp,
+  Maximize
+  } from 'lucide-angular';
 
-import { routes } from './app.routes';
+  import { routes } from './app.routes';
 
-export const appConfig: ApplicationConfig = {
+  export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
@@ -48,12 +61,26 @@ export const appConfig: ApplicationConfig = {
         ChevronLeft,
         ChevronRight,
         LogOut,
-        PanelLeftClose,
-        PanelLeftOpen,
-        CircleCheck,
-        Users,
-        BarChart3
+        PanelLeftClose, 
+        PanelLeftOpen, 
+        CircleCheck, 
+        Users, 
+        BarChart3,
+        Bell,
+        BellOff,
+        UserMinus,
+        MessageSquare,
+        Send,
+        Smile,
+        Share2,
+        DollarSign,
+        ExternalLink,
+        Clock,
+        Eye,
+        ThumbsUp,
+        Maximize
       })
     )
   ]
-};
+  };
+

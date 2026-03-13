@@ -27,6 +27,10 @@ export const routes: Routes = [
         path: 'settings',
         loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent),
       },
+      {
+        path: 'stream/:id',
+        loadComponent: () => import('./features/stream/stream-view.component').then(m => m.StreamViewComponent),
+      },
     ],
   },
 ];
