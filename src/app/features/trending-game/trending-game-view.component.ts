@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, inject, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
@@ -12,6 +12,7 @@ interface StreamItem {
   platform: string;
   thumbnail: string;
   tags: string[];
+  following: boolean;
 }
 
 interface GameDetail {
@@ -124,7 +125,10 @@ interface GameDetail {
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             @for (stream of liveStreams(); track stream.id) {
-              <div class="bg-surface border border-border rounded-2xl overflow-hidden group hover:border-primary/40 transition-all shadow-lg hover:shadow-primary/5 cursor-pointer">
+              <div 
+                [routerLink]="['/stream', stream.id]"
+                class="bg-surface border border-border rounded-2xl overflow-hidden group hover:border-primary/40 transition-all shadow-lg hover:shadow-primary/5 cursor-pointer relative"
+              >
                 <!-- Thumbnail Area -->
                 <div class="aspect-video relative overflow-hidden bg-background">
                   <div class="w-full h-full bg-gradient-to-br from-primary/10 to-surface flex items-center justify-center">
@@ -140,11 +144,21 @@ interface GameDetail {
                     </span>
                   </div>
                   
-                  <div class="absolute top-3 right-3">
+                  <div class="absolute top-3 right-3 flex flex-col items-end gap-2">
                     <span class="px-2 py-1 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold rounded-lg flex items-center border border-white/5">
                       <lucide-icon name="users" class="w-3 h-3 me-1.5 text-primary"></lucide-icon>
                       {{ stream.viewers }}
                     </span>
+                    
+                    <!-- Follow Action Button -->
+                    <button 
+                      (click)="toggleFollow($event, stream)"
+                      class="w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-300 shadow-lg"
+                      [class]="stream.following ? 'bg-primary text-white border-primary' : 'bg-black/40 text-white border-white/20 hover:bg-white/20'"
+                      [title]="stream.following ? 'Following' : 'Follow'"
+                    >
+                      <lucide-icon [name]="stream.following ? 'heart' : 'heart'" [class]="stream.following ? 'fill-current' : ''" class="w-4 h-4"></lucide-icon>
+                    </button>
                   </div>
                 </div>
 
@@ -256,7 +270,8 @@ export class TrendingGameViewComponent {
       viewers: '12.4k',
       platform: 'Twitch',
       thumbnail: '',
-      tags: ['Roleplay', 'NoPixel', 'English']
+      tags: ['Roleplay', 'NoPixel', 'English'],
+      following: false
     },
     {
       id: 2,
@@ -266,7 +281,8 @@ export class TrendingGameViewComponent {
       viewers: '8.2k',
       platform: 'YouTube',
       thumbnail: '',
-      tags: ['Speedrun', 'Heist', 'Challenge']
+      tags: ['Speedrun', 'Heist', 'Challenge'],
+      following: true
     },
     {
       id: 3,
@@ -276,7 +292,8 @@ export class TrendingGameViewComponent {
       viewers: '5.1k',
       platform: 'Twitch',
       thumbnail: '',
-      tags: ['Roleplay', 'Police', 'Funny']
+      tags: ['Roleplay', 'Police', 'Funny'],
+      following: false
     },
     {
       id: 4,
@@ -286,7 +303,8 @@ export class TrendingGameViewComponent {
       viewers: '3.7k',
       platform: 'Kick',
       thumbnail: '',
-      tags: ['Multiplayer', 'Survival', 'SubGames']
+      tags: ['Multiplayer', 'Survival', 'SubGames'],
+      following: false
     }
   ]);
 
@@ -297,4 +315,13 @@ export class TrendingGameViewComponent {
     { name: 'Minecraft', viewers: '145k', growth: '+8%' },
     { name: 'Counter-Strike 2', viewers: '128k', growth: '+15%' }
   ]);
+
+  toggleFollow(event: Event, stream: StreamItem) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    this.liveStreams.update(streams => 
+      streams.map(s => s.id === stream.id ? { ...s, following: !s.following } : s)
+    );
+  }
 }
