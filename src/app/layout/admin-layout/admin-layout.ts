@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, effect, HostListener, signal, inject, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, inject, PLATFORM_ID, HostListener, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
@@ -18,293 +19,241 @@ import { LucideAngularModule } from 'lucide-angular';
     RouterOutlet,
     RouterLink,
     NzLayoutModule,
-    NzMenuModule,
     NzAvatarModule,
-    NzInputModule,
     NzButtonModule,
-    NzDrawerModule,
     NzDropDownModule,
+    NzMenuModule,
+    NzDrawerModule,
+    NzInputModule,
+    NzBadgeModule,
     LucideAngularModule
   ],
   template: `
-    <nz-layout class="h-screen overflow-hidden flex flex-row">
+    <nz-layout class="min-h-screen bg-background-dark text-white">
       <!-- Sidebar Desktop -->
-      @if (!isMobile()) {
+      @if (!isMobile() && isInitialized()) {
         <nz-sider
-          class="h-full bg-white border-r border-gray-100 shadow-sm relative z-20"
-          nzCollapsible
-          [(nzCollapsed)]="isCollapsed"
+          class="h-screen sticky top-0 bg-background-dark border-r border-border-dark overflow-hidden"
+          [nzWidth]="256"
+          [nzCollapsed]="isCollapsed()"
           [nzTrigger]="null"
-          [nzWidth]="260"
-          [nzTheme]="'light'"
+          nzTheme="dark"
         >
-          <div class="h-16 flex items-center px-6 transition-all duration-300 overflow-hidden border-b border-gray-50">
-            <div class="w-8 h-8 bg-indigo-600 rounded-xl flex items-center justify-center flex-none">
-              <span class="text-white font-black text-lg italic">Y</span>
-            </div>
-            <span
-              class="ml-3 text-lg font-black text-gray-800 tracking-tight whitespace-nowrap"
-              [class.hidden]="isCollapsed()"
-            >
-              YUPI TV <span class="text-indigo-600">ADMIN</span>
-            </span>
-          </div>
-
-          <div class="flex flex-col h-[calc(100%-4rem)] justify-between py-4">
-            <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed()" class="border-none">
-              <ng-container *ngTemplateOutlet="menuItems"></ng-container>
-            </ul>
-
-            <div class="px-3" [class.px-1]="isCollapsed()">
-              <div 
-                class="bg-gray-50 rounded-2xl p-4 flex items-center gap-3 transition-all duration-300"
-                [class.justify-center]="isCollapsed()"
-              >
-                <nz-avatar nzIcon="user" class="bg-indigo-100 text-indigo-600 flex-none"></nz-avatar>
-                @if (!isCollapsed()) {
-                  <div class="overflow-hidden">
-                    <p class="m-0 font-bold text-gray-800 truncate text-sm">Super Admin</p>
-                    <p class="m-0 text-gray-400 text-xs truncate">admin@yupi.tv</p>
-                  </div>
-                }
+          <div class="flex flex-col h-full bg-background-dark">
+            <!-- Brand -->
+            <div class="p-6 flex items-center gap-3 h-16 shrink-0">
+              <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shrink-0">
+                <lucide-icon name="rocket" class="w-6 h-6"></lucide-icon>
               </div>
+              @if (!isCollapsed()) {
+                <div class="overflow-hidden whitespace-nowrap">
+                  <h1 class="text-lg font-bold leading-none m-0 text-white">StreamAdmin</h1>
+                  <p class="text-xs text-slate-400 m-0">Multi-platform Portal</p>
+                </div>
+              }
+            </div>
+
+            <!-- Nav -->
+            <nav class="flex-1 mt-4 overflow-y-auto custom-scrollbar">
+              <ul nz-menu nzMode="inline" nzTheme="dark" class="bg-transparent border-none">
+                <li nz-menu-item routerLink="/dashboard" nzMatchRouter class="!flex !items-center">
+                  <lucide-icon name="layout-dashboard" class="anticon"></lucide-icon>
+                  <span>Dashboard</span>
+                </li>
+                <li nz-menu-item routerLink="/analytics" nzMatchRouter class="!flex !items-center">
+                  <lucide-icon name="bar-chart-3" class="anticon"></lucide-icon>
+                  <span>Analytics</span>
+                </li>
+                <li nz-menu-item routerLink="/streamers" nzMatchRouter class="!flex !items-center">
+                  <lucide-icon name="users" class="anticon"></lucide-icon>
+                  <span>Streamers</span>
+                </li>
+                <li nz-menu-item routerLink="/platforms" nzMatchRouter class="!flex !items-center">
+                  <lucide-icon name="tv" class="anticon"></lucide-icon>
+                  <span>Platforms</span>
+                </li>
+                <li nz-menu-item routerLink="/revenue" nzMatchRouter class="!flex !items-center">
+                  <lucide-icon name="credit-card" class="anticon"></lucide-icon>
+                  <span>Revenue</span>
+                </li>
+              </ul>
+            </nav>
+
+            <!-- Bottom sidebar -->
+            <div class="p-4 border-t border-border-dark space-y-1">
+              <ul nz-menu nzMode="inline" nzTheme="dark" class="bg-transparent border-none">
+                <li nz-menu-item routerLink="/settings" nzMatchRouter class="!flex !items-center">
+                  <lucide-icon name="settings" class="anticon"></lucide-icon>
+                  <span>Settings</span>
+                </li>
+              </ul>
+              @if (!isCollapsed()) {
+                <div class="mt-4 p-3 rounded-xl bg-gradient-to-br from-primary to-purple-700 text-white shadow-lg">
+                  <p class="text-xs font-semibold uppercase tracking-wider opacity-80 m-0">Pro Plan</p>
+                  <p class="text-sm mt-1 mb-3 leading-tight text-white/90">Unlock advanced multi-stream analytics</p>
+                  <button nz-button nzType="default" nzBlock class="!bg-white/20 hover:!bg-white/30 !border-none !text-white !text-xs !font-bold h-9">
+                    Upgrade Now
+                  </button>
+                </div>
+              }
             </div>
           </div>
         </nz-sider>
       }
 
-      <!-- Sidebar Mobile (Drawer) -->
-      <nz-drawer
-        [nzVisible]="isDrawerOpen()"
-        nzPlacement="left"
-        [nzClosable]="false"
-        (nzOnClose)="isDrawerOpen.set(false)"
-        [nzWidth]="280"
-        [nzBodyStyle]="{ padding: '0' }"
-      >
-        <ng-container *nzDrawerContent>
-          <div class="h-16 flex items-center justify-between px-6 border-b border-gray-50">
-            <div class="flex items-center">
-              <div class="w-8 h-8 bg-indigo-600 rounded-xl flex items-center justify-center">
-                <span class="text-white font-black text-lg italic">Y</span>
-              </div>
-              <span class="ml-3 text-lg font-black text-gray-800 tracking-tight">YUPI TV <span class="text-indigo-600">ADMIN</span></span>
-            </div>
-            @if (isMobile()) {
-              <button nz-button nzType="text" (click)="isDrawerOpen.set(false)" class="p-0 h-8 w-8 flex items-center justify-center">
-                <lucide-icon name="x" class="w-5 h-5 text-gray-400"></lucide-icon>
+      <nz-layout class="flex-1 flex flex-col min-w-0 bg-background-dark min-h-screen">
+        <!-- Header -->
+        <nz-header class="!h-16 flex items-center justify-between px-4 md:px-8 sticky top-0 z-40 bg-background-dark/90 backdrop-blur-md border-b border-border-dark w-full">
+          <div class="flex items-center gap-4 flex-1 max-w-xl">
+             @if (isMobile()) {
+              <button nz-button nzType="text" (click)="isDrawerOpen.set(true)" class="p-0 h-10 w-10 flex items-center justify-center text-white hover:bg-surface-dark transition-colors">
+                <lucide-icon name="menu" class="w-6 h-6"></lucide-icon>
+              </button>
+            } @else {
+              <button nz-button nzType="text" (click)="isCollapsed.set(!isCollapsed())" class="hidden md:flex p-0 h-10 w-10 items-center justify-center text-white hover:bg-surface-dark transition-colors">
+                <lucide-icon [name]="isCollapsed() ? 'chevron-right' : 'chevron-left'" class="w-6 h-6"></lucide-icon>
               </button>
             }
-          </div>
-          <div class="flex flex-col h-[calc(100%-4rem)] justify-between py-4">
-            <ul nz-menu nzMode="inline" class="border-none mt-4">
-              <ng-container *ngTemplateOutlet="menuItems"></ng-container>
-            </ul>
 
-            <div class="px-3">
-              <div class="bg-gray-50 rounded-2xl p-4 flex items-center gap-3">
-                <nz-avatar nzIcon="user" class="bg-indigo-100 text-indigo-600 flex-none"></nz-avatar>
-                <div class="overflow-hidden">
-                  <p class="m-0 font-bold text-gray-800 truncate text-sm">Super Admin</p>
-                  <p class="m-0 text-gray-400 text-xs truncate">admin@yupi.tv</p>
-                </div>
-              </div>
+            <!-- Search -->
+            <div class="relative group flex-1">
+              <lucide-icon name="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors w-5 h-5"></lucide-icon>
+              <input 
+                class="w-full bg-surface-dark border-none rounded-xl pl-10 pr-4 py-2 focus:ring-2 focus:ring-primary transition-all text-sm outline-none text-white placeholder:text-slate-500 h-10" 
+                placeholder="Search streamers..." 
+                type="text"
+              />
             </div>
           </div>
-        </ng-container>
-      </nz-drawer>
 
-      <!-- Main Content -->
-      <nz-layout class="flex-1 flex flex-col h-full bg-gray-50/50">
-        <!-- Header -->
-        <nz-header class="bg-white/80 backdrop-blur-md px-4 md:px-6 !flex items-center justify-between border-b border-gray-100 shadow-sm z-30 h-16">
           <div class="flex items-center gap-4">
-            <!-- Mobile Menu Toggle -->
-            <button
-              nz-button
-              nzType="text"
-              class="md:hidden h-10 w-10 p-0 flex items-center justify-center rounded-xl bg-gray-50 hover:bg-gray-100"
-              (click)="isDrawerOpen.set(true)"
-            >
-              <lucide-icon name="menu" class="w-5 h-5 text-gray-600"></lucide-icon>
+            <button nz-button nzType="text" class="p-2 h-10 w-10 flex items-center justify-center rounded-lg hover:bg-surface-dark text-slate-400 relative border-none cursor-pointer">
+              <nz-badge nzStatus="error" [nzOffset]="[0, 5]" class="flex">
+                <lucide-icon name="bell" class="w-6 h-6"></lucide-icon>
+              </nz-badge>
             </button>
             
-            <!-- Desktop Toggle -->
-            <button
-              nz-button
-              nzType="text"
-              class="hidden md:flex h-10 w-10 p-0 items-center justify-center rounded-xl hover:bg-gray-50"
-              (click)="isCollapsed.set(!isCollapsed())"
-            >
-              <lucide-icon 
-                [name]="isCollapsed() ? 'chevron-right' : 'chevron-left'" 
-                class="w-5 h-5 text-gray-400"
-              ></lucide-icon>
-            </button>
-
-            <div class="flex flex-col">
-              <h1 class="text-lg sm:text-xl font-black m-0 leading-tight">
-                {{ currentTitle() }}
-              </h1>
-              <span class="text-xs text-gray-400 font-medium hidden sm:block">¡Bienvenido de nuevo!</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2 sm:gap-4">
-            <div class="hidden md:flex items-center bg-gray-100 rounded-2xl px-3 h-10 border border-transparent focus-within:border-indigo-100 focus-within:bg-white transition-all w-64">
-              <lucide-icon name="search" class="w-4 h-4 text-gray-400 flex-none"></lucide-icon>
-              <input type="text" placeholder="Buscar streamers..." class="bg-transparent border-none outline-none text-sm ml-2 w-full text-gray-600 placeholder:text-gray-400" />
-            </div>
-
-            <button nz-button nzType="text" class="h-10 w-10 p-0 flex items-center justify-center rounded-xl text-gray-400 hover:text-indigo-600 hover:bg-indigo-50">
-              <lucide-icon name="settings" class="w-5 h-5"></lucide-icon>
-            </button>
-
-            <div 
-              nz-dropdown 
-              [nzDropdownMenu]="userMenu" 
-              nzPlacement="bottomRight"
-              class="flex items-center gap-2 cursor-pointer ml-1"
-            >
-              <nz-avatar 
-                [nzSize]="40" 
-                nzIcon="user" 
-                class="bg-indigo-600 text-white rounded-xl shadow-lg shadow-indigo-100 border-2 border-white"
-              ></nz-avatar>
+            <div class="h-8 w-[1px] bg-border-dark hidden sm:block"></div>
+            
+            <div class="flex items-center gap-3 pl-2 cursor-pointer group" nz-dropdown [nzDropdownMenu]="userMenu" nzPlacement="bottomRight">
+              <div class="text-right hidden sm:block">
+                <p class="text-sm font-semibold leading-none m-0 text-white group-hover:text-primary transition-colors">Alex Rivera</p>
+                <p class="text-xs text-slate-400 mt-1 m-0">Administrator</p>
+              </div>
+              <img 
+                class="w-10 h-10 rounded-full border-2 border-primary/20 group-hover:border-primary transition-all object-cover" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWUqTB7AH4N6kAeaCkTGjdhnPZ5QR_YziP1aTo20OpNzwMa49B3IKKqBug2G6_CA75bNygVvuzMfznPdfWsuiBLQSCqDAtgEFlY8t4Yd6bj1KcL2mFyZhLtPgbTkhWfexXQXh-Ac_mHuIn7ioGIIckeYRkMsNoIpgVFWqdJVHNyDkQddcxiv5uoA7fMTwmUQVNgUU9LigMiTHzC8_r97QM2Gubpu45LmwNMqTz5sNhm0CISz8dLXPu5kIKfI5dPJH7ja8Xk7TcldA"
+              />
             </div>
             
             <nz-dropdown-menu #userMenu="nzDropdownMenu">
-              <div nz-menu class="min-w-[12rem] p-2 rounded-2xl shadow-xl border-none">
-                <div nz-menu-item class="rounded-xl py-2 flex items-center gap-3">
-                  <lucide-icon name="user" class="w-4 h-4 text-gray-500"></lucide-icon>
-                  <span class="font-medium text-gray-700">Mi Perfil</span>
-                </div>
-                <div nz-menu-item class="rounded-xl py-2 flex items-center gap-3">
-                  <lucide-icon name="settings" class="w-4 h-4 text-gray-500"></lucide-icon>
-                  <span class="font-medium text-gray-700">Ajustes</span>
-                </div>
-                <div nz-menu-divider class="my-1 border-gray-50"></div>
-                <div nz-menu-item class="rounded-xl py-2 flex items-center gap-3 group">
-                  <lucide-icon name="log-out" class="w-4 h-4 text-red-400 group-hover:text-red-500"></lucide-icon>
-                  <span class="font-medium text-red-500">Cerrar Sesión</span>
-                </div>
-              </div>
+              <ul nz-menu nzTheme="dark" class="min-w-[180px] rounded-xl border-none shadow-2xl bg-surface-dark p-2">
+                <li nz-menu-item class="!flex !items-center !gap-3 !py-2 !rounded-lg">
+                  <lucide-icon name="user" class="w-4 h-4"></lucide-icon>
+                  <span>Profile</span>
+                </li>
+                <li nz-menu-item class="!flex !items-center !gap-3 !py-2 !rounded-lg">
+                  <lucide-icon name="settings" class="w-4 h-4"></lucide-icon>
+                  <span>Settings</span>
+                </li>
+                <li nz-menu-divider class="!my-2 !bg-border-dark"></li >
+                <li nz-menu-item class="!flex !items-center !gap-3 !py-2 !rounded-lg !text-red-500 hover:!bg-red-500/10">
+                  <lucide-icon name="log-out" class="w-4 h-4"></lucide-icon>
+                  <span>Sign Out</span>
+                </li>
+              </ul>
             </nz-dropdown-menu>
           </div>
         </nz-header>
 
-        <!-- Scrollable Content -->
-        <nz-content class="flex-1 overflow-y-auto custom-scrollbar">
-          <div class="p-4 sm:p-8">
+        <!-- Content Area -->
+        <nz-content class="flex-1 overflow-y-auto custom-scrollbar bg-background-dark relative">
+          <div class="p-4 md:p-8 min-h-full">
             <router-outlet></router-outlet>
           </div>
         </nz-content>
       </nz-layout>
     </nz-layout>
 
-    <!-- Menu Template shared between sidebar and drawer -->
-    <ng-template #menuItems>
-      <li nz-menu-item routerLink="/dashboard" nzMatchRouter (click)="closeDrawerOnNav()">
-        <lucide-icon name="layout-dashboard" class="anticon"></lucide-icon>
-        <span>Dashboard</span>
-      </li>
-      <li nz-menu-item routerLink="/streamers" nzMatchRouter (click)="closeDrawerOnNav()">
-        <lucide-icon name="video" class="anticon"></lucide-icon>
-        <span>Streamers</span>
-      </li>
-      <li nz-menu-item routerLink="/favorites" nzMatchRouter (click)="closeDrawerOnNav()">
-        <lucide-icon name="heart" class="anticon"></lucide-icon>
-        <span>Favoritos</span>
-      </li>
-      <li nz-menu-divider></li>
-      <li nz-menu-item routerLink="/settings" nzMatchRouter (click)="closeDrawerOnNav()">
-        <lucide-icon name="settings" class="anticon"></lucide-icon>
-        <span>Ajustes</span>
-      </li>
-    </ng-template>
+    <!-- Mobile Drawer -->
+    <nz-drawer
+      [nzVisible]="isDrawerOpen()"
+      nzPlacement="left"
+      [nzClosable]="true"
+      (nzOnClose)="isDrawerOpen.set(false)"
+      [nzWidth]="280"
+      [nzBodyStyle]="{ padding: '0', background: '#170f23' }"
+    >
+      <ng-container *nzDrawerContent>
+        <div class="flex flex-col h-full bg-background-dark text-white">
+           <div class="p-6 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shrink-0">
+                <lucide-icon name="rocket" class="w-6 h-6"></lucide-icon>
+              </div>
+              <div>
+                <h1 class="text-lg font-bold leading-none m-0 text-white">StreamAdmin</h1>
+                <p class="text-xs text-slate-400 m-0">Multi-platform Portal</p>
+              </div>
+            </div>
+            <nav class="flex-1 mt-4">
+              <ul nz-menu nzMode="inline" nzTheme="dark" class="bg-transparent border-none">
+                <li nz-menu-item routerLink="/dashboard" nzMatchRouter (click)="isDrawerOpen.set(false)" class="!flex !items-center">
+                  <lucide-icon name="layout-dashboard" class="anticon"></lucide-icon>
+                  <span>Dashboard</span>
+                </li>
+                <li nz-menu-item routerLink="/analytics" nzMatchRouter (click)="isDrawerOpen.set(false)" class="!flex !items-center">
+                  <lucide-icon name="bar-chart-3" class="anticon"></lucide-icon>
+                  <span>Analytics</span>
+                </li>
+              </ul>
+            </nav>
+        </div>
+      </ng-container>
+    </nz-drawer>
   `,
   styles: `
     :host {
       display: block;
+      height: 100vh;
+      overflow: hidden;
     }
     
     .anticon {
       width: 18px;
       height: 18px;
-      margin-right: 10px;
-      vertical-align: middle;
+      margin-right: 12px;
       display: inline-flex !important;
       align-items: center;
       justify-content: center;
     }
 
     ::ng-deep {
+      .ant-drawer-header {
+        background-color: var(--color-background-dark);
+        border-bottom: 1px solid var(--color-border-dark);
+        .ant-drawer-title { color: white; }
+        .ant-drawer-close { color: white; }
+      }
       .ant-layout-sider-children {
         display: flex;
         flex-direction: column;
-      }
-      .ant-menu-inline, .ant-menu-vertical {
-        border-right: none !important;
-      }
-      .ant-menu-item {
-        height: 48px !important;
-        line-height: 48px !important;
-        margin: 4px 12px !important;
-        width: calc(100% - 24px) !important;
-        border-radius: 12px !important;
-        font-weight: 500 !important;
-        color: #64748b !important;
-        transition: all 0.2s ease-in-out !important;
-
-        &-selected {
-          background: #f5f7ff !important;
-          color: #4f46e5 !important;
-          font-weight: 700 !important;
-          &::after {
-            display: none !important;
-          }
-        }
-        
-        &:hover:not(.ant-menu-item-selected) {
-          background: #f8fafc !important;
-          color: #4f46e5 !important;
-        }
-      }
-      
-      .ant-menu-inline-collapsed .ant-menu-item {
-        width: calc(100% - 16px) !important;
-        margin: 4px 8px !important;
-        padding: 0 16px !important;
-      }
-
-      .custom-scrollbar::-webkit-scrollbar {
-        width: 6px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #e2e8f0;
-        border-radius: 10px;
-        &:hover {
-          background: #cbd5e1;
-        }
       }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdminLayoutComponent {
+export class AdminLayoutComponent implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
-  
+
   isCollapsed = signal(false);
   isMobile = signal(false);
   isDrawerOpen = signal(false);
-  currentTitle = signal('DASHBOARD');
+  isInitialized = signal(false);
 
-  constructor() {
+  ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.checkBreakpoint();
+      this.isInitialized.set(true);
     }
   }
 
@@ -314,18 +263,16 @@ export class AdminLayoutComponent {
   }
 
   private checkBreakpoint(): void {
-    const isMobileView = window.innerWidth < 768;
-    this.isMobile.set(isMobileView);
+    if (!isPlatformBrowser(this.platformId)) return;
+    
+    const width = window.innerWidth;
+    const isMobileView = width < 1024;
+    
+    if (this.isMobile() !== isMobileView) {
+      this.isMobile.set(isMobileView);
+    }
     
     if (isMobileView) {
-      this.isCollapsed.set(false);
-    } else {
-      this.isDrawerOpen.set(false);
-    }
-  }
-
-  closeDrawerOnNav(): void {
-    if (this.isMobile()) {
       this.isDrawerOpen.set(false);
     }
   }

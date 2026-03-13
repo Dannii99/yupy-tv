@@ -1,40 +1,45 @@
-# PROMS
+## PROM PARA CREAR
 
-## prom init
+Task: Create the main admin layout from scratch for Yupi TV Admin.
 
-"Lee los archivos de la carpeta .ai para entender el contexto del proyecto.
-Este proyecto es Angular standalone usando signals, rxjs cuando aplique,
-NG-ZORRO para UI, Tailwind para layout y SCSS para estilos."
+Goal:
+Build the base application shell for the admin portal using the current project standards.
 
-## prom para gemini
+Requirements:
 
-Lee y respeta:
+- Create a responsive main layout with:
+  - left sidebar navigation
+  - top header
+  - main content area
+- The layout must align with the product identity defined in /.ai/project-context.md and /.ai/ui-visual-guidelines.md
+- The visual style should follow the dark-first premium streaming dashboard direction
+- Use NG-ZORRO where appropriate
+- Use Tailwind for layout, spacing, and visual structure
+- Use SCSS only for component-scoped styling when needed
+- Keep the layout modular and reusable
+- The layout should be suitable for future pages such as Dashboard, Streamers, Favorites, and Settings
 
-- .ai/rules.md
-- .ai/architecture.md
-- .ai/project-context.md
-  y las skills configuradas (si existen).
+Implementation notes:
 
-Objetivo:
-Crear la base UI del portal Yupi TV Admin y el primer feature "dashboard".
+- Prefer Angular standalone
+- Use OnPush
+- Keep business logic out of layout
+- Sidebar and header should be layout-focused only
+- Use clean semantic component structure
+- Include sensible placeholder navigation items based on the project context
 
-Requisitos:
+Deliverable:
 
-1. Crear un AdminLayout responsive (sidebar + header + content) usando NG-ZORRO + Tailwind.
-   - Sidebar colapsable
-   - Header con título + buscador placeholder + avatar
-   - Mobile: sidebar tipo drawer o colapsado
-2. Ruteo standalone:
-   - app.routes.ts con lazy load al layout y al dashboard
-3. Feature Dashboard:
-   - Página dashboard con cards (NG-ZORRO) + Tailwind layout
-   - Estados: loading/empty (aunque sea mock)
-4. Estado:
-   - Signals para UI state (collapsed, loading)
-   - RxJS solo si es necesario (no forzar)
-5. Entrega:
-   - Lista de archivos a crear/modificar
-   - Código completo de cada archivo
-   - Cómo validar con `ng serve`
+- Create the layout files and structure needed
+- Keep the implementation production-oriented, not a throwaway mock
+- Do not create fake complex business logic
+- Use realistic placeholder UI where necessary
 
-No inventes dependencias nuevas. Mantén SCSS solo para overrides puntuales.
+Follow these project guides strictly:
+
+- /.ai/rules.md
+- /.ai/ownership.md
+- /.ai/architecture.md
+- /.ai/execution.md
+- /.ai/project-context.md
+- /.ai/ui-visual-guidelines.md

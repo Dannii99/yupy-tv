@@ -23,3 +23,13 @@ src/app
 -shared/
 -features/
 -layout/
+
+Editing Rules:
+
+- Modify only the minimum code necessary to satisfy the request
+- Do not refactor unrelated code
+- Do not rewrite entire files when a small change is enough
+- Preserve existing working logic unless the task explicitly requires changing it
+- Respect manual fixes already present in the code
+- Do not remove comments, TODOs, or temporary guards unless explicitly requested
+- Do not rename files, folders, classes, selectors, or public methods unless explicitly requested
