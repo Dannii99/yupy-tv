@@ -44,7 +44,18 @@ import {
   Gamepad,
   TrendingUp,
   SearchX,
-  Plus
+  Plus,
+  Chrome,
+  Github,
+  Mail,
+  Lock,
+  EyeOff,
+  Loader2,
+  ArrowRight,
+  Facebook,
+  Apple,
+  Sun,
+  Moon
   } from 'lucide-angular';
 
   import { routes } from './app.routes';
@@ -96,7 +107,18 @@ import {
         Gamepad,
         TrendingUp,
         SearchX,
-        Plus
+        Plus,
+        Chrome,
+        Github,
+        Mail,
+        Lock,
+        EyeOff,
+        Loader2,
+        ArrowRight,
+        Facebook,
+        Apple,
+        Sun,
+        Moon
       })
     )
   ]

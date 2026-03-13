@@ -10,19 +10,23 @@ export class ThemeService {
   private platformId = inject(PLATFORM_ID);
   private readonly storageKey = 'yupi-tv-theme';
   
-  // Default to 'dark' as per project guidelines
+  // Initialize from localStorage if available, otherwise default to dark
   theme = signal<Theme>(this.getInitialTheme());
 
   constructor() {
-    // Sync theme with document class whenever it changes
+    // Synchronize the DOM and localStorage whenever the theme signal changes
     effect(() => {
       const currentTheme = this.theme();
+      
       if (isPlatformBrowser(this.platformId)) {
+        // Apply class to document element
         if (currentTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
         }
+        
+        // Persist to localStorage
         localStorage.setItem(this.storageKey, currentTheme);
       }
     });
@@ -39,11 +43,19 @@ export class ThemeService {
   private getInitialTheme(): Theme {
     if (isPlatformBrowser(this.platformId)) {
       const savedTheme = localStorage.getItem(this.storageKey) as Theme;
-      if (savedTheme) return savedTheme;
       
-      // Fallback to system preference or default 'dark'
-      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      // If we have a saved theme, use it
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        return savedTheme;
+      }
+      
+      // Fallback: Check system preference
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        return 'light';
+      }
     }
+    
+    // Default to 'dark' for everything else (SSR or no preference)
     return 'dark';
   }
 }
