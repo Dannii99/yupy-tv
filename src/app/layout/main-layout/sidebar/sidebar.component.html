@@ -1,0 +1,60 @@
+<aside 
+  class="fixed left-0 top-0 z-40 h-screen transition-all duration-300 sm:translate-x-0 border-r border-border-dark"
+  [class.w-64]="!isCollapsed()"
+  [class.w-20]="isCollapsed()"
+  [class.-translate-x-full]="false"
+  aria-label="Sidebar"
+>
+  <div class="h-full px-3 py-4 overflow-y-auto bg-surface-dark flex flex-col overflow-x-hidden">
+    <!-- Logo -->
+    <div class="flex items-center ps-2.5 mb-8 overflow-hidden h-8">
+      <lucide-icon name="play" class="w-8 h-8 text-primary shrink-0"></lucide-icon>
+      <span 
+        class="ms-3 self-center text-xl font-bold whitespace-nowrap text-white transition-opacity duration-200"
+        [class.opacity-0]="isCollapsed()"
+        [class.pointer-events-none]="isCollapsed()"
+      >
+        YUPI<span class="text-primary">TV</span>
+      </span>
+    </div>
+
+    <!-- Navigation -->
+    <ul class="space-y-2 font-medium flex-1">
+      @for (item of navItems; track item.label) {
+        <li>
+          <a 
+            [routerLink]="item.path" 
+            routerLinkActive="bg-primary/10 text-primary border-r-4 border-primary"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="flex items-center p-3 text-slate-300 rounded-lg hover:bg-white/5 hover:text-white group transition-all duration-200 overflow-hidden h-11"
+            [attr.title]="isCollapsed() ? item.label : null"
+          >
+            <lucide-icon [name]="item.icon" class="w-5 h-5 transition duration-75 group-hover:text-white shrink-0"></lucide-icon>
+            <span 
+              class="ms-3 whitespace-nowrap transition-opacity duration-200"
+              [class.opacity-0]="isCollapsed()"
+            >
+              {{ item.label }}
+            </span>
+          </a>
+        </li>
+      }
+    </ul>
+
+    <!-- Footer / User Actions -->
+    <div class="pt-4 mt-4 space-y-2 font-medium border-t border-border-dark overflow-hidden h-20">
+      <a 
+        href="#" 
+        class="flex items-center p-3 text-slate-400 rounded-lg hover:bg-red-500/10 hover:text-red-500 group transition-all duration-200 overflow-hidden"
+      >
+        <lucide-icon name="log-out" class="w-5 h-5 transition duration-75 group-hover:text-red-500 shrink-0"></lucide-icon>
+        <span 
+          class="ms-3 transition-opacity duration-200"
+          [class.opacity-0]="isCollapsed()"
+        >
+          Logout
+        </span>
+      </a>
+    </div>
+  </div>
+</aside>

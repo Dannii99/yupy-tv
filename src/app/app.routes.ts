@@ -1,36 +1,32 @@
 import { Routes } from '@angular/router';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./layout/admin-layout/admin-layout').then(m => m.AdminLayoutComponent),
+    component: MainLayoutComponent,
     children: [
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./features/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
+        loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
       },
-      // Placeholder routes for other features
       {
         path: 'streamers',
-        loadComponent: () => import('./features/dashboard/pages/dashboard-page/dashboard-page').then(m => m.DashboardPageComponent)
+        loadComponent: () => import('./features/streamers/streamers.component').then(m => m.StreamersComponent),
       },
       {
         path: 'favorites',
-        loadComponent: () => import('./features/dashboard/pages/dashboard-page/dashboard-page').then(m => m.DashboardPageComponent)
+        loadComponent: () => import('./features/favorites/favorites.component').then(m => m.FavoritesComponent),
       },
       {
         path: 'settings',
-        loadComponent: () => import('./features/dashboard/pages/dashboard-page/dashboard-page').then(m => m.DashboardPageComponent)
-      }
-    ]
+        loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent),
+      },
+    ],
   },
-  {
-    path: '**',
-    redirectTo: 'dashboard'
-  }
 ];
