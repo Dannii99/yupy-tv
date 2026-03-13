@@ -8,7 +8,7 @@ import { LucideAngularModule } from 'lucide-angular';
   standalone: true,
   imports: [CommonModule, RouterModule, LucideAngularModule],
   template: `
-    <div class="space-y-8 pb-8 animate-in fade-in duration-500">
+    <div class="space-y-8 pb-28 md:pb-8 animate-in fade-in duration-500">
       <!-- Welcome Header -->
       <header class="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
@@ -34,9 +34,9 @@ import { LucideAngularModule } from 'lucide-angular';
       </header>
 
       <!-- Stat Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="flex md:grid overflow-x-auto md:overflow-visible gap-6 pb-4 md:pb-0 scrollbar-hide md:grid-cols-2 lg:grid-cols-4">
         @for (stat of stats; track stat.label) {
-          <div class="bg-surface border border-border p-5 rounded-2xl shadow-sm hover:border-primary/40 transition-all duration-300 group relative overflow-hidden">
+          <div class="min-w-[260px] md:min-w-0 bg-surface border border-border p-5 rounded-2xl shadow-sm hover:border-primary/40 transition-all duration-300 group relative overflow-hidden">
             <!-- Subtle accent background -->
             <div class="absolute -right-4 -top-4 w-20 h-20 bg-primary/5 rounded-full group-hover:bg-primary/10 transition-colors"></div>
             
@@ -62,7 +62,7 @@ import { LucideAngularModule } from 'lucide-angular';
       </div>
 
       <!-- Main Dashboard Content -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-12 items-start">
         
         <!-- Live Now Section (8 cols) -->
         <section class="lg:col-span-8 space-y-4">
@@ -74,11 +74,11 @@ import { LucideAngularModule } from 'lucide-angular';
             <button class="text-sm text-primary hover:underline font-medium">View All</button>
           </div>
           
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex md:grid overflow-x-auto md:overflow-visible gap-4 pb-4 md:pb-0 scrollbar-hide md:grid-cols-2">
             @for (stream of liveStreams; track stream.id) {
               <div 
                 [routerLink]="['/stream', stream.id]"
-                class="bg-surface border border-border rounded-2xl overflow-hidden group hover:border-primary/30 transition-all shadow-md cursor-pointer"
+                class="min-w-[280px] md:min-w-0 bg-surface border border-border rounded-2xl overflow-hidden group hover:border-primary/30 transition-all shadow-md cursor-pointer"
               >
                 <div class="aspect-video relative overflow-hidden bg-background">
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -111,42 +111,11 @@ import { LucideAngularModule } from 'lucide-angular';
               </div>
             }
           </div>
-          
-          <!-- Trending Games Section -->
-          <div class="pt-4">
-            <div class="flex items-center justify-between mb-4">
-              <h2 class="text-xl font-bold text-text-base flex items-center">
-                <lucide-icon name="bar-chart-3" class="w-5 h-5 text-primary me-2"></lucide-icon>
-                Trending Games
-              </h2>
-              <button 
-                routerLink="/games"
-                class="text-sm text-primary hover:underline font-medium"
-              >
-                View All
-              </button>
-            </div>
-            <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-              @for (game of trendingGames; track game.id) {
-                <div 
-                  [routerLink]="['/trending-game', game.id]"
-                  class="min-w-[160px] max-w-[160px] bg-surface border border-border rounded-xl p-3 hover:border-primary/50 transition-all cursor-pointer group shadow-sm"
-                >
-                  <div class="aspect-[3/4] rounded-lg bg-background mb-3 overflow-hidden shadow-inner">
-                    <div class="w-full h-full bg-gradient-to-br from-primary/10 to-surface flex items-center justify-center">
-                       <lucide-icon name="play" class="w-8 h-8 text-primary/30 group-hover:scale-110 transition-transform"></lucide-icon>
-                    </div>
-                  </div>
-                  <div class="font-bold text-text-base text-sm truncate mb-1 group-hover:text-primary transition-colors">{{ game.name }}</div>
-                  <div class="text-[10px] text-text-muted uppercase tracking-wider font-bold">{{ game.viewers }} viewers</div>
-                </div>
-              }
-            </div>
-          </div>
         </section>
 
         <!-- Right Side: Recent Alerts (4 cols) -->
-        <aside class="lg:col-span-4 space-y-4">
+        <!-- Rearranged: Stacks after Live Now on mobile, but sits as sidebar on desktop -->
+        <aside class="lg:col-span-4 space-y-6 lg:row-span-2">
           <div class="flex items-center justify-between">
             <h2 class="text-xl font-bold text-text-base flex items-center">
               <lucide-icon name="circle-check" class="w-5 h-5 text-primary me-2"></lucide-icon>
@@ -157,17 +126,17 @@ import { LucideAngularModule } from 'lucide-angular';
           
           <div class="space-y-3">
             @for (alert of recentAlerts; track alert.id) {
-              <div class="p-4 bg-surface border border-border rounded-2xl hover:border-primary/20 transition-all duration-200 shadow-sm relative overflow-hidden group">
+              <div class="p-3 md:p-4 bg-surface border border-border rounded-2xl hover:border-primary/20 transition-all duration-200 shadow-sm relative overflow-hidden group">
                 <div 
                   class="absolute left-0 top-0 bottom-0 w-1 transition-all duration-200"
                   [class]="alert.type === 'live' ? 'bg-red-500 group-hover:w-1.5' : 'bg-primary group-hover:w-1.5'"
                 ></div>
-                <div class="flex gap-4 items-start">
+                <div class="flex gap-3 md:gap-4 items-start">
                   <div 
-                    class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 border border-border"
+                    class="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 border border-border"
                     [class]="alert.type === 'live' ? 'bg-red-500/10 text-red-500' : 'bg-primary/10 text-primary'"
                   >
-                    <lucide-icon [name]="alert.icon" class="w-5 h-5"></lucide-icon>
+                    <lucide-icon [name]="alert.icon" class="w-4 h-4 md:w-5 md:h-5"></lucide-icon>
                   </div>
                   <div class="space-y-1">
                     <p class="text-sm text-text-base font-medium leading-tight">{{ alert.message }}</p>
@@ -183,7 +152,7 @@ import { LucideAngularModule } from 'lucide-angular';
           </div>
           
           <!-- Pro View Promo -->
-          <div class="mt-6 p-6 rounded-2xl bg-gradient-to-br from-primary to-purple-800 text-white shadow-xl relative overflow-hidden group">
+          <div class="p-5 md:p-6 rounded-2xl bg-gradient-to-br from-primary to-purple-800 text-white shadow-xl relative overflow-hidden group">
              <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-700"></div>
              <div class="relative z-10">
                <h4 class="font-bold text-lg mb-2">Upgrade to Pro</h4>
@@ -193,6 +162,37 @@ import { LucideAngularModule } from 'lucide-angular';
           </div>
         </aside>
 
+        <!-- Trending Games Section -->
+        <section class="lg:col-span-8 space-y-4">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold text-text-base flex items-center">
+              <lucide-icon name="bar-chart-3" class="w-5 h-5 text-primary me-2"></lucide-icon>
+              Trending Games
+            </h2>
+            <button 
+              routerLink="/games"
+              class="text-sm text-primary hover:underline font-medium"
+            >
+              View All
+            </button>
+          </div>
+          <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            @for (game of trendingGames; track game.id) {
+              <div 
+                [routerLink]="['/trending-game', game.id]"
+                class="min-w-[160px] max-w-[160px] bg-surface border border-border rounded-xl p-3 hover:border-primary/50 transition-all cursor-pointer group shadow-sm"
+              >
+                <div class="aspect-[3/4] rounded-lg bg-background mb-3 overflow-hidden shadow-inner">
+                  <div class="w-full h-full bg-gradient-to-br from-primary/10 to-surface flex items-center justify-center">
+                      <lucide-icon name="play" class="w-8 h-8 text-primary/30 group-hover:scale-110 transition-transform"></lucide-icon>
+                  </div>
+                </div>
+                <div class="font-bold text-text-base text-sm truncate mb-1 group-hover:text-primary transition-colors">{{ game.name }}</div>
+                <div class="text-[10px] text-text-muted uppercase tracking-wider font-bold">{{ game.viewers }} viewers</div>
+              </div>
+            }
+          </div>
+        </section>
       </div>
     </div>
   `,

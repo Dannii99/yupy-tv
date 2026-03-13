@@ -22,7 +22,7 @@ interface Clip {
   standalone: true,
   imports: [CommonModule, LucideAngularModule],
   template: `
-    <div class="flex flex-col lg:flex-row gap-6 animate-in fade-in duration-500 relative min-h-full">
+    <div class="flex flex-col lg:flex-row gap-6 animate-in fade-in duration-500 relative min-h-full pb-28 md:pb-8">
       
       <!-- Main Content Area: Video, Info, Stats, Clips -->
       <main class="flex-1 min-w-0 space-y-8">

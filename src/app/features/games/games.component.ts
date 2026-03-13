@@ -19,7 +19,7 @@ interface GameItem {
   standalone: true,
   imports: [CommonModule, RouterModule, LucideAngularModule],
   template: `
-    <div class="space-y-8 pb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div class="space-y-8 pb-28 md:pb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
       
       <!-- Page Header -->
       <header class="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -89,7 +89,7 @@ interface GameItem {
       </div>
 
       <!-- Games Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         @for (game of filteredGames(); track game.id) {
           <div 
             [routerLink]="['/trending-game', game.id]"
