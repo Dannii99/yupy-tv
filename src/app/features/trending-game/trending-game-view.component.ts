@@ -31,7 +31,7 @@ interface GameDetail {
   standalone: true,
   imports: [CommonModule, RouterModule, LucideAngularModule],
   template: `
-    <div class="space-y-8 pb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div class="space-y-8 pb-28 md:pb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
       
       <!-- Back Button -->
       <button 
