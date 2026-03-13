@@ -299,3 +299,32 @@ Follow these project guides strictly:
 - /.ai/project-context.md
 - /.ai/ui-patterns.md
 - /.ai/ui-visual-guidelines.md
+
+## Prompt corto para scrollbar
+
+Task: Add custom styling for the application scrollbars.
+
+Context:
+The application already works correctly. The goal is only to improve the visual design of scrollbars.
+
+Requirements:
+
+- Style scrollbars so they match the visual identity defined in /.ai/ui-visual-guidelines.md
+- Ensure the solution works across major browsers (Chrome, Edge, Safari, Firefox)
+- Prefer a minimal and elegant scrollbar design
+- Keep it consistent with the dark-first UI style
+
+Implementation notes:
+
+- Use CSS compatible with both WebKit and Firefox
+- Apply the styles globally if appropriate
+- Avoid breaking default scrolling behavior
+- Keep the implementation lightweight
+
+Constraints:
+
+- Do not modify unrelated styles
+- Do not redesign components
+- Make the smallest safe change possible
+
+Follow all /.ai/\*.md project guides.
