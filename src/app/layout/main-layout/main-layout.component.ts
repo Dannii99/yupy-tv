@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
+import { BottomNavComponent } from './bottom-nav/bottom-nav.component';
 import { LayoutService } from '../../core/services/layout.service';
 
 @Component({
@@ -14,7 +15,8 @@ import { LayoutService } from '../../core/services/layout.service';
     RouterModule, 
     NzLayoutModule, 
     SidebarComponent, 
-    HeaderComponent
+    HeaderComponent,
+    BottomNavComponent
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',

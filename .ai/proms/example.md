@@ -328,3 +328,85 @@ Constraints:
 - Make the smallest safe change possible
 
 Follow all /.ai/\*.md project guides.
+
+## Prompt corto para layout resposive tipo ionic
+
+Task: Improve the responsive behavior of the existing main layout for tablet and mobile screens.
+
+Context:
+The main layout already exists and works well on desktop.
+Do NOT redesign the desktop layout.
+Do NOT rebuild the layout from scratch.
+
+Goal:
+Adapt the existing layout so that on tablet and mobile it behaves more like a polished mobile app shell, inspired by Ionic-style mobile navigation patterns, while still matching the current product visual identity.
+
+Responsive Intent:
+
+- Keep the current desktop layout as-is for large screens
+- For tablet and mobile, transform the experience into a more mobile-friendly layout
+- The mobile/tablet experience should feel app-like, clean, and premium
+- This is a simulation of a mobile app shell inside the web app, not a literal Ionic implementation
+
+Mobile/Tablet Requirements:
+
+- Replace or adapt the desktop sidebar behavior for small screens
+- Use a mobile-friendly navigation pattern such as:
+  - top bar + bottom navigation
+    or
+  - top bar + drawer
+    whichever best fits the current product
+- The responsive layout must feel intentional and aesthetically integrated with the dark premium design
+- Navigation should remain clear and easy to use on smaller screens
+- The layout should preserve access to the main sections:
+  - Dashboard
+  - Streamers
+  - Favorites
+  - Games
+  - Settings
+
+Design Goals:
+
+- The mobile/tablet layout should feel similar to a modern app shell
+- It should feel elegant, not cramped
+- It should preserve the current dark-first, premium streaming/admin identity
+- It should not look like a generic admin dashboard squeezed into a phone screen
+
+Constraints:
+
+- Do NOT break the desktop experience
+- Do NOT redesign unrelated pages
+- Do NOT create unrelated new features
+- Modify only the main layout and the minimum supporting responsive navigation structure required
+- Preserve existing routing and navigation flow
+- Do not refactor unrelated code
+- Make the smallest safe set of changes needed to achieve a strong responsive experience
+
+Implementation Notes:
+
+- Use responsive Tailwind utilities
+- Keep Angular structure intact
+- Keep template logic light
+- Reuse existing navigation items and routing
+- Prioritize a polished responsive shell over large structural rewrites
+
+UI Direction:
+
+- Follow /.ai/ui-visual-guidelines.md
+- Keep the purple primary identity
+- Use rounded surfaces, subtle borders, and polished spacing
+- Ensure the responsive navigation feels coherent with the rest of the application
+
+Follow these project guides strictly:
+
+- /.ai/rules.md
+- /.ai/ownership.md
+- /.ai/architecture.md
+- /.ai/execution.md
+- /.ai/project-context.md
+- /.ai/ui-patterns.md
+- /.ai/ui-visual-guidelines.md
+
+Desktop must remain the baseline; mobile and tablet should be adaptive variants of the existing layout, not a separate redesign.
+
+For small screens, prefer a bottom navigation or compact mobile shell over a collapsed desktop sidebar.

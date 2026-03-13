@@ -1,29 +1,42 @@
-<header class="h-16 bg-surface/80 backdrop-blur-md border-b border-border flex items-center justify-between px-6 sticky top-0 z-30">
+<header class="h-16 bg-surface/80 backdrop-blur-md border-b border-border flex items-center justify-between px-4 md:px-6 sticky top-0 z-30">
   <div class="flex items-center space-x-4">
-    <!-- Sidebar Toggle -->
+    <!-- Mobile Logo -->
+    <div class="flex items-center lg:hidden overflow-hidden h-8 pr-2">
+      <lucide-icon name="play" class="w-7 h-7 text-primary shrink-0"></lucide-icon>
+      <span class="ms-2 self-center text-lg font-black whitespace-nowrap text-text-base">
+        YUPI<span class="text-primary">TV</span>
+      </span>
+    </div>
+
+    <!-- Sidebar Toggle (Desktop only) -->
     <button 
       (click)="toggleSidebar()"
-      class="p-2 text-text-muted hover:text-text-base hover:bg-primary/5 rounded-lg transition-all"
+      class="p-2 text-text-muted hover:text-text-base hover:bg-primary/5 rounded-lg transition-all hidden lg:block"
       [attr.title]="isSidebarCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
     >
       <lucide-icon [name]="isSidebarCollapsed() ? 'panel-left-open' : 'panel-left-close'" class="w-5 h-5"></lucide-icon>
     </button>
 
-    <!-- Search -->
-    <div class="relative w-96 hidden md:block">
+    <!-- Search (Desktop only) -->
+    <div class="relative w-72 xl:w-96 hidden md:block">
       <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
         <lucide-icon name="search" class="w-4 h-4 text-text-muted"></lucide-icon>
       </div>
       <input 
         type="text" 
-        class="bg-background border border-border text-text-base text-sm rounded-lg focus:ring-primary focus:border-primary block w-full ps-10 p-2.5 transition-all outline-none" 
-        placeholder="Search streamers, platforms..."
+        class="bg-background border border-border text-text-base text-sm rounded-lg focus:ring-primary focus:border-primary block w-full ps-10 p-2 transition-all outline-none" 
+        placeholder="Search streamers..."
       >
     </div>
   </div>
 
   <!-- Actions -->
-  <div class="flex items-center space-x-4">
+  <div class="flex items-center space-x-3 md:space-x-4">
+    <!-- Mobile Search Toggle (Optional but nice) -->
+    <button class="p-2 text-text-muted hover:text-text-base hover:bg-primary/5 rounded-full transition-all md:hidden">
+      <lucide-icon name="search" class="w-5 h-5"></lucide-icon>
+    </button>
+
     <!-- Notification -->
     <button class="relative p-2 text-text-muted hover:text-text-base hover:bg-primary/5 rounded-full transition-all">
       <lucide-icon name="circle-check" class="w-5 h-5"></lucide-icon>
@@ -31,13 +44,13 @@
     </button>
 
     <!-- User Profile -->
-    <div class="flex items-center space-x-3 ps-4 border-l border-border">
-      <div class="flex flex-col items-end hidden sm:flex">
+    <div class="flex items-center space-x-3 ps-2 md:ps-4 border-l border-border">
+      <div class="flex flex-col items-end hidden md:flex">
         <span class="text-sm font-medium text-text-base">Danny Ospino</span>
-        <span class="text-xs text-text-muted">Pro Viewer</span>
+        <span class="text-xs text-text-muted font-bold uppercase tracking-tighter">Pro</span>
       </div>
-      <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-purple-400 flex items-center justify-center border-2 border-border shadow-lg">
-        <lucide-icon name="user" class="w-6 h-6 text-white"></lucide-icon>
+      <div class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-tr from-primary to-purple-400 flex items-center justify-center border-2 border-border shadow-lg shrink-0">
+        <lucide-icon name="user" class="w-5 h-5 md:w-6 md:h-6 text-white"></lucide-icon>
       </div>
     </div>
   </div>

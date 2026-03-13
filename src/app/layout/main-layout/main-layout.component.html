@@ -1,22 +1,25 @@
 <nz-layout class="min-h-screen bg-background">
-  <!-- Sidebar -->
-  <app-sidebar></app-sidebar>
+  <!-- Sidebar (Desktop only) -->
+  <app-sidebar class="hidden lg:block"></app-sidebar>
 
   <!-- Main Area -->
   <nz-layout 
     class="bg-background min-h-screen flex flex-col transition-all duration-300"
-    [class.sm:ml-64]="!isSidebarCollapsed()"
-    [class.sm:ml-20]="isSidebarCollapsed()"
+    [class.lg:ml-64]="!isSidebarCollapsed()"
+    [class.lg:ml-20]="isSidebarCollapsed()"
   >
     <!-- Header -->
     <app-header></app-header>
 
     <!-- Main Content Area -->
-    <nz-content class="flex-1 p-6 overflow-x-hidden">
+    <nz-content class="flex-1 px-4 py-6 md:p-6 overflow-x-hidden pb-24 lg:pb-6">
       <!-- Router Outlet for nested routes -->
       <div class="max-w-7xl mx-auto h-full">
         <router-outlet></router-outlet>
       </div>
     </nz-content>
   </nz-layout>
+
+  <!-- Bottom Nav (Mobile/Tablet only) -->
+  <app-bottom-nav></app-bottom-nav>
 </nz-layout>
