@@ -55,7 +55,14 @@ import {
   Facebook,
   Apple,
   Sun,
-  Moon
+  Moon,
+  Check,
+  Twitter,
+  Instagram,
+  Globe,
+  Youtube,
+  Zap,
+  MoreHorizontal,
   } from 'lucide-angular';
 
   import { routes } from './app.routes';
@@ -118,7 +125,13 @@ import {
         Facebook,
         Apple,
         Sun,
-        Moon
+        Check,
+        Twitter,
+        Instagram,
+        Globe,
+        Youtube,
+        Zap,
+        MoreHorizontal,
       })
     )
   ]
