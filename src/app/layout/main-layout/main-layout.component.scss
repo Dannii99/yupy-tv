@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+::ng-deep {
+  .nz-layout {
+    background: var(--color-background-dark);
+  }
+}

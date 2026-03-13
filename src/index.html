@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>YupiTv</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- Theme initial check script to prevent FOUC -->
+  <script>
+    (function() {
+      const storageKey = 'yupi-tv-theme';
+      const savedTheme = localStorage.getItem(storageKey);
+      const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      const theme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
+      
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+</head>
+<body class="bg-background transition-colors duration-500">
+  <app-root></app-root>
+</body>
+</html>
