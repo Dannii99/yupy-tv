@@ -202,12 +202,20 @@ interface GameDetail {
               <lucide-icon name="flame" class="w-5 h-5 text-orange-500 me-2"></lucide-icon>
               More Trending
             </h2>
-            <button class="text-xs text-primary hover:underline font-bold">View All</button>
+            <button 
+              routerLink="/games"
+              class="text-xs text-primary hover:underline font-bold"
+            >
+              View All
+            </button>
           </div>
 
           <div class="space-y-4">
-            @for (otherGame of relatedGames(); track otherGame.name) {
-              <div class="flex gap-4 p-3 bg-surface border border-border rounded-xl hover:border-primary/40 transition-all group cursor-pointer shadow-sm">
+            @for (otherGame of relatedGames(); track otherGame.id) {
+              <div 
+                [routerLink]="['/trending-game', otherGame.id]"
+                class="flex gap-4 p-3 bg-surface border border-border rounded-xl hover:border-primary/40 transition-all group cursor-pointer shadow-sm"
+              >
                 <div class="w-16 h-20 rounded-lg bg-background overflow-hidden shrink-0 border border-border shadow-inner group-hover:scale-95 transition-transform duration-300">
                   <div class="w-full h-full bg-gradient-to-br from-primary/5 to-surface flex items-center justify-center">
                     <lucide-icon name="gamepad" class="w-6 h-6 text-primary/20"></lucide-icon>
@@ -235,7 +243,12 @@ interface GameDetail {
              <div class="relative z-10">
                <h4 class="font-bold text-lg mb-2">Not your game?</h4>
                <p class="text-white/70 text-xs mb-4 leading-relaxed">Discover hundreds of other categories and genres tailored to your taste.</p>
-               <button class="w-full py-2 bg-white text-primary rounded-xl text-xs font-bold hover:shadow-lg transition-all active:scale-95">Explore Categories</button>
+               <button 
+                routerLink="/games"
+                class="w-full py-2 bg-white text-primary rounded-xl text-xs font-bold hover:shadow-lg transition-all active:scale-95"
+               >
+                Explore Categories
+               </button>
              </div>
           </div>
         </aside>
@@ -309,11 +322,11 @@ export class TrendingGameViewComponent {
   ]);
 
   relatedGames = signal([
-    { name: 'League of Legends', viewers: '285k', growth: '+12%' },
-    { name: 'Valorant', viewers: '212k', growth: '+5%' },
-    { name: 'Just Chatting', viewers: '198k', growth: '+2%' },
-    { name: 'Minecraft', viewers: '145k', growth: '+8%' },
-    { name: 'Counter-Strike 2', viewers: '128k', growth: '+15%' }
+    { id: 'lol', name: 'League of Legends', viewers: '285k', growth: '+12%' },
+    { id: 'valorant', name: 'Valorant', viewers: '212k', growth: '+5%' },
+    { id: 'just-chatting', name: 'Just Chatting', viewers: '198k', growth: '+2%' },
+    { id: 'minecraft', name: 'Minecraft', viewers: '145k', growth: '+8%' },
+    { id: 'cs2', name: 'Counter-Strike 2', viewers: '128k', growth: '+15%' }
   ]);
 
   toggleFollow(event: Event, stream: StreamItem) {

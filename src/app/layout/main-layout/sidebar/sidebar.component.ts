@@ -18,6 +18,7 @@ export class SidebarComponent {
 
   navItems = [
     { label: 'Dashboard', path: '/dashboard', icon: 'layout-dashboard' },
+    { label: 'Games', path: '/games', icon: 'gamepad-2' },
     { label: 'Streamers', path: '/streamers', icon: 'video' },
     { label: 'Favorites', path: '/favorites', icon: 'heart' },
     { label: 'Settings', path: '/settings', icon: 'settings' },

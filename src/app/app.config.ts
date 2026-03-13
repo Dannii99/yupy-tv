@@ -41,7 +41,10 @@ import {
   Tags,
   PlayCircle,
   Flame,
-  Gamepad
+  Gamepad,
+  TrendingUp,
+  SearchX,
+  Plus
   } from 'lucide-angular';
 
   import { routes } from './app.routes';
@@ -90,7 +93,10 @@ import {
         Tags,
         PlayCircle,
         Flame,
-        Gamepad
+        Gamepad,
+        TrendingUp,
+        SearchX,
+        Plus
       })
     )
   ]

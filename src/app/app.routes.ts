@@ -20,6 +20,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/trending-game/trending-game-view.component').then(m => m.TrendingGameViewComponent),
       },
       {
+        path: 'games',
+        loadComponent: () => import('./features/games/games.component').then(m => m.GamesComponent),
+      },
+      {
         path: 'streamers',
         loadComponent: () => import('./features/streamers/streamers.component').then(m => m.StreamersComponent),
       },

@@ -114,10 +114,18 @@ import { LucideAngularModule } from 'lucide-angular';
           
           <!-- Trending Games Section -->
           <div class="pt-4">
-            <h2 class="text-xl font-bold text-text-base mb-4 flex items-center">
-              <lucide-icon name="bar-chart-3" class="w-5 h-5 text-primary me-2"></lucide-icon>
-              Trending Games
-            </h2>
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-bold text-text-base flex items-center">
+                <lucide-icon name="bar-chart-3" class="w-5 h-5 text-primary me-2"></lucide-icon>
+                Trending Games
+              </h2>
+              <button 
+                routerLink="/games"
+                class="text-sm text-primary hover:underline font-medium"
+              >
+                View All
+              </button>
+            </div>
             <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
               @for (game of trendingGames; track game.id) {
                 <div 
