@@ -6,6 +6,15 @@
 
 @theme {
   --color-primary: #924cfa;
+  
+  /* Semantic tokens that change based on theme class */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-text-base: var(--text-base);
+  --color-text-muted: var(--text-muted);
+  
+  /* Reference colors from guidelines */
   --color-background-light: #f7f5f8;
   --color-background-dark: #170f23;
   --color-surface-dark: #251b36;
@@ -18,7 +27,30 @@
 }
 
 @layer base {
+  :root {
+    --background: #f7f5f8;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --text-base: #1e293b;
+    --text-muted: #64748b;
+  }
+
+  .dark {
+    --background: #170f23;
+    --surface: #251b36;
+    --border: #3a2d52;
+    --text-base: #ffffff;
+    --text-muted: #94a3b8;
+  }
+
   body {
-    @apply bg-background-dark font-display text-white;
+    @apply bg-background font-display text-text-base transition-colors duration-300;
+  }
+}
+
+/* NG-ZORRO overrides for dark mode support if needed */
+.dark {
+  .ant-layout {
+    background: var(--background);
   }
 }

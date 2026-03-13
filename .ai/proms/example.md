@@ -247,3 +247,55 @@ Constraints:
 - Make the smallest safe change possible
 - Do not refactor unrelated code
 - Preserve existing behavior unless explicitly required
+
+## Prompt recomendado para implementar Dark/Light mode
+
+Task: Implement dark mode and light mode switching from the Settings page.
+
+Context:
+The application already supports a dark theme through Tailwind's `dark` class and color tokens defined in the UI reference.
+
+Goal:
+Allow the user to switch between dark mode and light mode from the Settings page.
+
+Requirements:
+
+- Add a theme toggle inside the Settings page
+- The toggle should allow switching between:
+  - Dark mode
+  - Light mode
+- The theme change should update the root `html` element by adding or removing the `dark` class
+- Persist the user preference using localStorage so the theme is restored on page reload
+- The theme should apply globally across the layout and all pages
+
+Implementation notes:
+
+- Prefer a simple theme service if needed
+- Keep the logic lightweight
+- Do not introduce unnecessary global state
+- Use Angular Signals for local UI state where appropriate
+- Ensure the toggle integrates cleanly with the existing layout
+
+UI requirements:
+
+- The toggle should follow the visual guidelines defined in:
+  /.ai/ui-visual-guidelines.md
+- The control should be simple and consistent with the Settings page style
+- Prefer a modern toggle or segmented control rather than a plain checkbox
+
+Constraints:
+
+- Do not redesign the Settings page entirely
+- Do not create new modules or features unrelated to theme switching
+- Do not refactor unrelated code
+- Modify the existing implementation
+
+Follow these project guides strictly:
+
+- /.ai/rules.md
+- /.ai/ownership.md
+- /.ai/architecture.md
+- /.ai/execution.md
+- /.ai/project-context.md
+- /.ai/ui-patterns.md
+- /.ai/ui-visual-guidelines.md

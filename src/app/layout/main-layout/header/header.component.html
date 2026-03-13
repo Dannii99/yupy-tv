@@ -1,9 +1,9 @@
-<header class="h-16 bg-surface-dark/80 backdrop-blur-md border-b border-border-dark flex items-center justify-between px-6 sticky top-0 z-30">
+<header class="h-16 bg-surface/80 backdrop-blur-md border-b border-border flex items-center justify-between px-6 sticky top-0 z-30">
   <div class="flex items-center space-x-4">
     <!-- Sidebar Toggle -->
     <button 
       (click)="toggleSidebar()"
-      class="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+      class="p-2 text-text-muted hover:text-text-base hover:bg-primary/5 rounded-lg transition-all"
       [attr.title]="isSidebarCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
     >
       <lucide-icon [name]="isSidebarCollapsed() ? 'panel-left-open' : 'panel-left-close'" class="w-5 h-5"></lucide-icon>
@@ -12,11 +12,11 @@
     <!-- Search -->
     <div class="relative w-96 hidden md:block">
       <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-        <lucide-icon name="search" class="w-4 h-4 text-slate-400"></lucide-icon>
+        <lucide-icon name="search" class="w-4 h-4 text-text-muted"></lucide-icon>
       </div>
       <input 
         type="text" 
-        class="bg-background-dark border border-border-dark text-white text-sm rounded-lg focus:ring-primary focus:border-primary block w-full ps-10 p-2.5 transition-all outline-none" 
+        class="bg-background border border-border text-text-base text-sm rounded-lg focus:ring-primary focus:border-primary block w-full ps-10 p-2.5 transition-all outline-none" 
         placeholder="Search streamers, platforms..."
       >
     </div>
@@ -25,18 +25,18 @@
   <!-- Actions -->
   <div class="flex items-center space-x-4">
     <!-- Notification -->
-    <button class="relative p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-full transition-all">
+    <button class="relative p-2 text-text-muted hover:text-text-base hover:bg-primary/5 rounded-full transition-all">
       <lucide-icon name="circle-check" class="w-5 h-5"></lucide-icon>
-      <span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full border-2 border-surface-dark"></span>
+      <span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full border-2 border-surface"></span>
     </button>
 
     <!-- User Profile -->
-    <div class="flex items-center space-x-3 ps-4 border-l border-border-dark">
+    <div class="flex items-center space-x-3 ps-4 border-l border-border">
       <div class="flex flex-col items-end hidden sm:flex">
-        <span class="text-sm font-medium text-white">Alex Rivera</span>
-        <span class="text-xs text-slate-400">Pro Viewer</span>
+        <span class="text-sm font-medium text-text-base">Alex Rivera</span>
+        <span class="text-xs text-text-muted">Pro Viewer</span>
       </div>
-      <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-purple-400 flex items-center justify-center border-2 border-border-dark shadow-lg">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-purple-400 flex items-center justify-center border-2 border-border shadow-lg">
         <lucide-icon name="user" class="w-6 h-6 text-white"></lucide-icon>
       </div>
     </div>
