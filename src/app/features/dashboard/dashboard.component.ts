@@ -97,13 +97,21 @@ import { LucideAngularModule } from 'lucide-angular';
                   </div>
 
                   <div class="absolute bottom-3 left-3 flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full border-2 border-primary bg-background overflow-hidden shadow-xl ring-2 ring-black/20">
+                    <div 
+                      class="w-10 h-10 rounded-full border-2 border-primary bg-background overflow-hidden shadow-xl ring-2 ring-black/20 cursor-pointer hover:scale-110 transition-transform"
+                      [routerLink]="['/streamer', stream.name.toLowerCase()]"
+                    >
                       <div class="w-full h-full bg-primary/20 flex items-center justify-center">
                         <lucide-icon name="user" class="w-5 h-5 text-primary"></lucide-icon>
                       </div>
                     </div>
                     <div>
-                      <div class="text-white font-bold text-sm leading-tight drop-shadow-md">{{ stream.name }}</div>
+                      <div 
+                        class="text-white font-bold text-sm leading-tight drop-shadow-md cursor-pointer hover:text-primary transition-colors"
+                        [routerLink]="['/streamer', stream.name.toLowerCase()]"
+                      >
+                        {{ stream.name }}
+                      </div>
                       <div class="text-slate-300 text-xs line-clamp-1 drop-shadow-md">{{ stream.title }}</div>
                     </div>
                   </div>

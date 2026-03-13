@@ -43,6 +43,10 @@ export const routes: Routes = [
         path: 'stream/:id',
         loadComponent: () => import('./features/stream/stream-view.component').then(m => m.StreamViewComponent),
       },
+      {
+        path: 'streamer/:id',
+        loadComponent: () => import('./features/streamers/streamer-profile/streamer-profile.component').then(m => m.StreamerProfileComponent),
+      },
     ],
   },
 ];

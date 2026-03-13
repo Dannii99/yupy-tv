@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
 interface FavoriteStreamer {
@@ -17,7 +18,7 @@ interface FavoriteStreamer {
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, RouterModule, LucideAngularModule],
   template: `
     <div class="space-y-8 pb-28 md:pb-8 animate-in fade-in duration-500">
       <!-- Header -->
@@ -54,7 +55,10 @@ interface FavoriteStreamer {
               
               <!-- Streamer Info -->
               <div class="col-span-1 md:col-span-5 flex items-center gap-4">
-                <div class="relative shrink-0">
+                <div 
+                  class="relative shrink-0 cursor-pointer"
+                  [routerLink]="['/streamer', streamer.id]"
+                >
                   <div class="w-12 h-12 rounded-full border-2 border-border bg-background flex items-center justify-center overflow-hidden shadow-md group-hover:border-primary/50 transition-colors">
                     <lucide-icon name="user" class="w-6 h-6 text-text-muted"></lucide-icon>
                   </div>
@@ -71,7 +75,12 @@ interface FavoriteStreamer {
 
                 <div class="min-w-0">
                   <div class="flex items-center gap-2 mb-0.5">
-                    <span class="font-bold text-text-base group-hover:text-primary transition-colors truncate">{{ streamer.name }}</span>
+                    <span 
+                      [routerLink]="['/streamer', streamer.id]"
+                      class="font-bold text-text-base group-hover:text-primary transition-colors truncate cursor-pointer"
+                    >
+                      {{ streamer.name }}
+                    </span>
                     <span 
                       class="text-[9px] px-1.5 py-0.5 rounded-md font-bold uppercase tracking-tighter"
                       [class]="platformStyles[streamer.platform]"

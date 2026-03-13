@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
 interface ChatMessage {
@@ -20,7 +21,7 @@ interface Clip {
 @Component({
   selector: 'app-stream-view',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, RouterModule, LucideAngularModule],
   template: `
     <div class="flex flex-col lg:flex-row gap-6 animate-in fade-in duration-500 relative min-h-full pb-28 md:pb-8">
       
@@ -62,14 +63,22 @@ interface Clip {
 
           <!-- Streamer Info -->
           <div class="flex flex-col md:flex-row md:items-start gap-6 px-2">
-             <div class="w-16 h-16 md:w-20 md:h-20 rounded-[2rem] border-2 border-primary bg-surface p-1 shadow-2xl shrink-0">
+             <div 
+               class="w-16 h-16 md:w-20 md:h-20 rounded-[2rem] border-2 border-primary bg-surface p-1 shadow-2xl shrink-0 cursor-pointer hover:scale-105 transition-transform"
+               [routerLink]="['/streamer', 'ninja']"
+              >
                 <div class="w-full h-full rounded-[1.75rem] bg-background flex items-center justify-center overflow-hidden">
                   <lucide-icon name="user" class="w-10 h-10 text-primary/40"></lucide-icon>
                 </div>
              </div>
              <div class="min-w-0 flex-1 space-y-3">
                 <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-                  <h1 class="text-2xl md:text-3xl font-black text-text-base tracking-tight truncate">{{ streamerName }}</h1>
+                  <h1 
+                    class="text-2xl md:text-3xl font-black text-text-base tracking-tight truncate cursor-pointer hover:text-primary transition-colors"
+                    [routerLink]="['/streamer', 'ninja']"
+                  >
+                    {{ streamerName }}
+                  </h1>
                   <div class="flex items-center gap-2">
                     <span class="px-2.5 py-1 bg-primary/10 text-primary text-[10px] font-black rounded-lg border border-primary/20 uppercase tracking-wider">{{ category }}</span>
                     <div class="h-1 w-1 rounded-full bg-border"></div>
