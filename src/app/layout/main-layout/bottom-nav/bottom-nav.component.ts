@@ -8,7 +8,7 @@ import { LucideAngularModule } from 'lucide-angular';
   standalone: true,
   imports: [CommonModule, RouterModule, LucideAngularModule],
   template: `
-    <nav class="fixed bottom-0 left-0 z-50 w-full h-16 bg-surface/90 backdrop-blur-xl border-t border-border lg:hidden safe-area-bottom">
+    <nav class="fixed bottom-0 left-0 z-50 w-full h-20 bg-surface/90 backdrop-blur-xl border-t border-border lg:hidden safe-area-bottom">
       <div class="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
         @for (item of navItems; track item.label) {
           <button 
@@ -17,7 +17,7 @@ import { LucideAngularModule } from 'lucide-angular';
             [routerLinkActiveOptions]="{ exact: true }"
             class="inline-flex flex-col items-center justify-center px-5 hover:bg-primary/5 transition-all duration-300 group relative"
           >
-            <lucide-icon [name]="item.icon" class="w-5 h-5 mb-1 transition-transform group-active:scale-90"></lucide-icon>
+            <lucide-icon [name]="item.icon" class="w-7 h-7 mb-1 transition-transform group-active:scale-90"></lucide-icon>
             <span class="text-[10px] font-bold uppercase tracking-wider group-active:scale-95 transition-transform">{{ item.label }}</span>
             
             <!-- Active Indicator -->
