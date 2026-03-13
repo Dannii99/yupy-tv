@@ -19,7 +19,7 @@ interface FavoriteStreamer {
   standalone: true,
   imports: [CommonModule, LucideAngularModule],
   template: `
-    <div class="space-y-8 pb-8 animate-in fade-in duration-500">
+    <div class="space-y-8 pb-28 md:pb-8 animate-in fade-in duration-500">
       <!-- Header -->
       <header class="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
